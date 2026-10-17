@@ -3,7 +3,7 @@ package com.example.demo.racecar.dto;
 import java.util.UUID;
 
 public record GetRaceCarResponse(
-        UUID uuid,
+        UUID id,
         String modelName,
         int startNumber,
         double engineDisplacement,
