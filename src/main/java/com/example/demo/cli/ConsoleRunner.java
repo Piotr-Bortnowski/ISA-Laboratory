@@ -75,7 +75,7 @@ public class ConsoleRunner implements CommandLineRunner {
         // Printing
         for (int i = 0; i < cars.size(); i++) {
             RaceCar car = cars.get(i);
-            System.out.println(i+1 + ". #" + car.getStartNumber() + " " + car.getModelName() + "[" + car.getClass().getName() + "]");
+            System.out.println(i+1 + ". #" + car.getStartNumber() + " " + car.getModelName() + "[" + car.getRacingClass().getName() + "]");
         }
     }
 
@@ -101,6 +101,7 @@ public class ConsoleRunner implements CommandLineRunner {
         int choice = readInt(scanner, "Select a racing class: ");
         if (choice < 1 || choice > classes.size()) {
             System.out.println("Entered a wrong number -> cancelling...");
+            return;
         }
 
         raceCarService.create(model, startNumber, displacement, hybrid, classes.get(choice-1));
