@@ -36,4 +36,12 @@ public class RacingClassService {
     public void delete(RacingClass racingClass) {
         repository.delete(racingClass);
     }
+
+    public void save(RacingClass racingClass) {
+        repository.save(racingClass);
+    }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
+    }
 }

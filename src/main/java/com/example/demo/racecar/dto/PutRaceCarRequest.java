@@ -6,6 +6,5 @@ public record PutRaceCarRequest(
         String modelName,
         Integer startNumber,
         Double engineDisplacement,
-        Boolean hybridPowertrain,
-        UUID racingClass
+        Boolean hybridPowertrain
 ) {}

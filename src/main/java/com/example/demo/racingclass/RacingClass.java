@@ -34,7 +34,7 @@ public class RacingClass implements Serializable, Comparable<RacingClass> {
 
     @Builder.Default
     @ToString.Exclude
-    @OneToMany(mappedBy = "racingClass")
+    @OneToMany(mappedBy = "racingClass", cascade = CascadeType.REMOVE)
     private List<RaceCar> raceCars = new ArrayList<>();
 
     @Override
