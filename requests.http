@@ -1,0 +1,154 @@
+@host = http://localhost:8080/api
+@gt3 = c1a55000-0000-0000-0000-000000000001
+@lmp2 = c1a55000-0000-0000-0000-000000000002
+@newClass = c1a55000-0000-0000-0000-000000000004
+@porsche = ca400000-0000-0000-0000-000000000001
+@newCar = ca400000-0000-0000-0000-000000000010
+@missing = ffffffff-ffff-ffff-ffff-ffffffffffff
+###
+# ============== RACING CLASSES ==============
+###
+
+### GET all classes
+# Expected: 200 OK, list { "racingClasses": [ { id, name } ] }
+GET {{host}}/racing-classes
+
+### GET one class
+# Expected: 200 OK, GT3 class details
+GET {{host}}/racing-classes/{{gt3}}
+
+### Get non-existing class
+# Expected: 404 Not Found
+GET {{host}}/racing-classes/{{missing}}
+
+### Create a new class
+# Expected: 201 Created
+PUT {{host}}/racing-classes/{{newClass}}
+Content-Type: application/json
+
+{
+  "name": "LMP3",
+  "maxHorsepower": 470,
+  "minWeight": 1000
+}
+
+### Updating existing class (same id as previous request)
+# Expected: 204 No Content
+PUT {{host}}/racing-classes/{{newClass}}
+Content-Type: application/json
+
+{
+  "name": "LMP3 Asia",
+  "maxHorsepower": 480,
+  "minWeight": 1050
+}
+
+### Creating a class with a missing field
+# Expected: 400 Bad Request
+PUT {{host}}/racing-classes/{{newClass}}
+Content-Type: application/json
+
+{
+  "name": "new name"
+}
+
+###
+# ============== RACE CARS ==============
+###
+
+### Get all cars
+# Expected: 200 OK, list { "raceCars": [ { id, modelName } ] }
+GET {{host}}/race-cars
+
+### Get all GT3 cars
+# Expected: 200 OK, 3 cars list
+GET {{host}}/racing-classes/{{gt3}}/race-cars
+
+### Get cars of existing but empty class
+# Expected: 200 OK, empty list
+GET {{host}}/racing-classes/{{newClass}}/race-cars
+
+### Get cars of non-existing class
+# Expected: 404 Not Found
+GET {{host}}/racing-classes/{{missing}}/race-cars
+
+### Get one car
+# Expected: 200 OK, more details of this car
+GET {{host}}/race-cars/{{porsche}}
+
+### Get non-existing car
+# Expected: 404 Not Found
+GET {{host}}/race-cars/{{missing}}
+
+### Add a car to empty class(LMP3)
+# Expected: 201 Created
+PUT {{host}}/racing-classes/{{newClass}}/race-cars/{{newCar}}
+Content-Type: application/json
+
+{
+  "modelName": "Ginetta G61-LT-P325-EVO",
+  "startNumber": 44,
+  "engineDisplacement": 3.5,
+  "hybridPowertrain": false
+}
+
+### Update car from previos request
+# Expected: 204 No Content
+PUT {{host}}/racing-classes/{{newClass}}/race-cars/{{newCar}}
+Content-Type: application/json
+
+{
+  "modelName": "Ginetta G61-LT-P325-EVO",
+  "startNumber": 67,
+  "engineDisplacement": 3.5,
+  "hybridPowertrain": false
+}
+
+### Add a car to non-existing class
+# Expected: 404 Not Found
+PUT {{host}}/racing-classes/{{missing}}/race-cars/{{newCar}}
+Content-Type: application/json
+
+{
+  "modelName": "GHOST",
+  "startNumber": 99,
+  "engineDisplacement": 2.0,
+  "hybridPowertrain": true
+}
+
+### Add a car with a missing field
+# Expected: 400 Bad Request
+PUT {{host}}/racing-classes/{{newClass}}/race-cars/{{newCar}}
+Content-Type: application/json
+
+{
+  "modelName": "new name"
+}
+
+### Delete a car
+# Expected: 204 No Content
+DELETE {{host}}/race-cars/{{porsche}}
+
+### Delete a non-existing car
+# Expected: 404 Not Found
+DELETE {{host}}/race-cars/{{porsche}}
+
+###
+# Deleting class with its cars
+###
+
+### Delete LMP3 class
+# Expected: 204 No Content
+DELETE {{host}}/racing-classes/{{newClass}}
+
+### Checking if class was deleted
+# Expected: 404 Not Found
+GET {{host}}/racing-classes/{{newClass}}
+
+### Check if car from that class was deleted
+# Expected: 404 Not Found
+GET {{host}}/race-cars/{{newCar}}
+
+### Deleting a non-existing class
+# Expected: 404 Not Found
+DELETE {{host}}/racing-classes/{{missing}}
