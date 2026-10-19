@@ -10,5 +10,5 @@ public record GetRaceCarResponse(
         boolean hybridPowertrain,
         RacingClass racingClass
 ) {
-    public record RacingClass(UUID id, String name) {}
+    public record RacingClass(UUID id) {}
 }

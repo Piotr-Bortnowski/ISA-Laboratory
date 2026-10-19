@@ -1,12 +1,9 @@
 package com.example.demo.racingclass;
 
-import com.example.demo.racecar.RaceCar;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,11 +28,6 @@ public class RacingClass implements Serializable, Comparable<RacingClass> {
 
     @Column(name = "min_weight")
     private int minWeight;
-
-    @Builder.Default
-    @ToString.Exclude
-    @OneToMany(mappedBy = "racingClass", cascade = CascadeType.REMOVE)
-    private List<RaceCar> raceCars = new ArrayList<>();
 
     @Override
     public int compareTo(RacingClass o) {
