@@ -41,7 +41,7 @@ public class ConsoleRunner implements CommandLineRunner {
                 case "delete" -> deleteCar(scanner);
                 case "quit" -> {
                     System.out.println("Quitting...");
-                    return; // ends run() and therefore the whole app
+                    System.exit(0);
                 }
                 default -> System.out.println("Unknown command -> type 'help\n");
             }
