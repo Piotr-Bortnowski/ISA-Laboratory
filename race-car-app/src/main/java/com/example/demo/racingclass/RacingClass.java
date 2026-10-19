@@ -2,9 +2,7 @@ package com.example.demo.racingclass;
 
 import com.example.demo.racecar.RaceCar;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 @Table(name = "racing_classes")
 public class RacingClass {
     @Id

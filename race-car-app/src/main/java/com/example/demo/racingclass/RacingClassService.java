@@ -23,9 +23,9 @@ public class RacingClassService {
         return repository.findById(id);
     }
 
-    public RacingClass create() {
+    public RacingClass create(UUID id) {
         RacingClass racingClass = RacingClass.builder()
-                .id(UUID.randomUUID())
+                .id(id)
                 .build();
         return repository.save(racingClass);
     }

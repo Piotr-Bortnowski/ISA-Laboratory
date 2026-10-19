@@ -8,6 +8,9 @@
 ###
 # ============== RACING CLASSES ==============
 ###
+### get all race cars
+# Expected: 200
+GET http://localhost:8082/api/racing-classes/c1a55000-0000-0000-0000-000000000001/race-cars
 
 ### GET all classes
 # Expected: 200 OK, list { "racingClasses": [ { id, name } ] }

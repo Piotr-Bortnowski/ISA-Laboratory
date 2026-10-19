@@ -34,7 +34,6 @@ public class RaceCarController {
 
     @GetMapping("/racing-classes/{classId}/race-cars")
     public GetRaceCarsResponse getRacingClassCars(@PathVariable UUID classId) {
-        RacingClass racingClass = racingClassService.find(classId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Optional<RacingClass> classOptional = racingClassService.find(classId);
         if (classOptional.isPresent()) {
             return toResponse(raceCarService.findAllByRacingClass(classOptional.get()));
@@ -110,7 +109,7 @@ public class RaceCarController {
                 raceCar.getStartNumber(),
                 raceCar.getEngineDisplacement(),
                 raceCar.isHybridPowertrain(),
-                new GetRaceCarResponse.RacingClass(raceCar.getRacingClass().getId(), raceCar.getRacingClass().getName())
+                new GetRaceCarResponse.RacingClass(raceCar.getRacingClass().getId())
         );
     }
     private GetRaceCarsResponse toResponse(List<RaceCar> cars) {
