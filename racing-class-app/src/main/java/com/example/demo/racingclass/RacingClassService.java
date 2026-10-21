@@ -1,5 +1,6 @@
 package com.example.demo.racingclass;
 
+import com.example.demo.racingclass.event.RacingClassEventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.UUID;
 public class RacingClassService {
 
     private final RacingClassRepository repository;
+    private final RacingClassEventRepository eventRepository;
 
-    public RacingClassService(RacingClassRepository repository) {
+    public RacingClassService(RacingClassRepository repository,  RacingClassEventRepository eventRepository) {
         this.repository = repository;
+        this.eventRepository = eventRepository;
     }
 
     public List<RacingClass> findAll() {
@@ -23,25 +26,20 @@ public class RacingClassService {
         return repository.findById(id);
     }
 
-    public RacingClass create(String name, int maxHorsepower, int minWeight) {
-        RacingClass racingClass = RacingClass.builder()
-                .id(UUID.randomUUID())
-                .name(name)
-                .maxHorsepower(maxHorsepower)
-                .minWeight(minWeight)
-                .build();
-        return repository.save(racingClass);
+
+    // create -> actually creates a new class so event is needed
+    public void create(RacingClass racingClass) {
+        repository.save(racingClass);
+        eventRepository.create(racingClass.getId());
     }
 
-    public void delete(RacingClass racingClass) {
-        repository.delete(racingClass);
-    }
-
+    // save -> just update an existing class
     public void save(RacingClass racingClass) {
         repository.save(racingClass);
     }
 
     public void delete(UUID id) {
         repository.deleteById(id);
+        eventRepository.delete(id);
     }
 }

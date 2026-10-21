@@ -54,12 +54,14 @@ public class RacingClassController {
                 .maxHorsepower(request.maxHorsepower())
                 .minWeight(request.minWeight())
                 .build();
-        racingClassService.save(racingClass);
 
+        // check whether to create or update
         if (exists) {
+            racingClassService.save(racingClass);
             return ResponseEntity.noContent().build();  // 204
         }
         else {
+            racingClassService.create(racingClass);
             return ResponseEntity.status(HttpStatus.CREATED).build(); // 201
         }
     }
