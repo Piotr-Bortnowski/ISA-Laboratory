@@ -55,6 +55,7 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {"proxyConfig": "proxy.conf.json"},
           "configurations": {
             "production": {
               "buildTarget": "lab5-frontend:build:production"
