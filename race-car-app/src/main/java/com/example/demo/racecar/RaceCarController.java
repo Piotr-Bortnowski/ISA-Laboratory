@@ -5,7 +5,6 @@ import com.example.demo.racecar.dto.GetRaceCarsResponse;
 import com.example.demo.racecar.dto.PutRaceCarRequest;
 import com.example.demo.racingclass.RacingClass;
 import com.example.demo.racingclass.RacingClassService;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

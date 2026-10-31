@@ -40,8 +40,7 @@ public class RacingClassController {
 
     @PutMapping("/racing-classes/{classId}")
     public ResponseEntity<Void> putRacingClass(@PathVariable UUID classId, @RequestBody PutRacingClassRequest request) {
-        Optional<RacingClass> optional = racingClassService.find(classId);
-
+        
         boolean exists = racingClassService.find(classId).isPresent();
 
         if (request.name() == null || request.maxHorsepower() == null || request.minWeight() == null) {
