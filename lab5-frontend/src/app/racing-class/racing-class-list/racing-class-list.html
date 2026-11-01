@@ -1,1 +1,27 @@
-<p>racing-class-list works!</p>
+<section class="panel">
+  <h1>Klasy wyścigowe</h1>
+
+  <ul class="list">
+    @for (rc of racingClasses(); track rc.id) {
+      <li
+        [class.selected]="rc.id === selectedId()"
+        (click)="select(rc.id)">
+        {{ rc.name }}
+      </li>
+    } @empty {
+      <li class="empty">Brak dostępnych klas wyścigowych.</li>
+    }
+  </ul>
+
+  <div class="actions">
+    @if (selectedId()) {
+      <a class="button" [routerLink]="['/classes', selectedId(), 'edit']">Edytuj</a>
+      <a class="button" [routerLink]="['/classes', selectedId() ]">Szczegóły</a>
+    }
+    @else {
+      <a class="button" routerLink="/classes/new">Dodaj</a>
+    }
+    
+    <button class="danger" (click)="removeSelected()" [disabled]="!selectedId()">Usuń zaznaczoną</button>
+  </div>
+</section>

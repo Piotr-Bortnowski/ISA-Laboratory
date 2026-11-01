@@ -1,1 +1,49 @@
-<p>racing-class-details works!</p>
+<section class="panel">
+  @if (racingClass(); as rc) {
+    <h1>{{ rc.name }}</h1>
+
+    <dl class="details">
+      <dt>Nazwa</dt>
+      <dd>{{ rc.name }}</dd>
+
+      <dt>Maks. moc</dt>
+      <dd>{{ rc.maxHorsepower }} KM</dd>
+
+      <dt>Min. masa</dt>
+      <dd>{{ rc.minWeight }} kg</dd>
+    </dl>
+
+    <h2>Samochody w klasie</h2>
+
+    <ul class="list">
+      @for (car of classCars(); track car.id) {
+        <li
+          [class.selected]="car.id === selectedCarId()"
+          (click)="selectCar(car.id)">
+          {{ car.modelName }}
+        </li>
+      } @empty {
+        <li class="empty">Brak samochodów w tej klasie.</li>
+      }
+    </ul>
+
+    <div class="actions">
+      <a class="button" routerLink="/classes">Powrót</a>
+      
+
+      @if (selectedCarId()) {
+        <a class="button" [routerLink]="['/classes', classId, 'cars', selectedCarId(), 'edit']">Edytuj</a>
+        <a class="button" [routerLink]="['/classes', classId, 'cars', selectedCarId()]">Szczegóły</a>
+      }
+      @else {
+        <a class="button" [routerLink]="['/classes', classId, 'cars', 'new']">Dodaj</a>
+      }
+
+      <button class="danger" (click)="removeSelectedCar()" [disabled]="!selectedCarId()">
+        Usuń zaznaczony
+      </button>
+    </div>
+  } @else {
+    <p>Ładowanie...</p>
+  }
+</section>
