@@ -19,6 +19,6 @@ public class RacingClassEventRepository {
     }
 
     public void delete(UUID id) {
-        restClient.delete().uri("api/racing-classes/{id}", id).retrieve().toBodilessEntity();
+        restClient.delete().uri("/api/racing-classes/{id}", id).retrieve().toBodilessEntity();
     }
 }

@@ -1,0 +1,12 @@
+# Zależności i pakiety
+**/node_modules/
+
+# Pliki budowania i artefakty (Angular / Java / inne)
+**/dist/
+**/.angular/
+**/target/
+
+# Opcjonalnie: Ignorowanie logów i plików systemowych
+*.log
+.git
+.gitignore
