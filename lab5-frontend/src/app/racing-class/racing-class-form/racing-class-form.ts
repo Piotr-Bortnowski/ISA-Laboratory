@@ -30,7 +30,7 @@ export class RacingClassForm {
     }
   }
 
-  private save() {
+  save() {
     if (this.form.invalid) {
       return
     }
