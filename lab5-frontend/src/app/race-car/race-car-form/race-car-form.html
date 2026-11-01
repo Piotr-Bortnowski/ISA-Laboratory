@@ -1,0 +1,24 @@
+<section class="panel">
+  <h1>{{ carId ? 'Edycja samochodu' : 'Nowy samochód' }}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <label>Model
+      <input formControlName="modelName" />
+    </label>
+    <label>Numer startowy
+      <input type="number" formControlName="startNumber" />
+    </label>
+    <label>Pojemność silnika (l)
+      <input type="number" step="0.1" formControlName="engineDisplacement" />
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" formControlName="hybridPowertrain" />
+      Napęd hybrydowy
+    </label>
+
+    <div class="actions">
+      <a class="button" [routerLink]="['/classes', classId]">Anuluj</a>
+      <button type="submit" [disabled]="form.invalid">Zapisz</button>
+    </div>
+  </form>
+</section>

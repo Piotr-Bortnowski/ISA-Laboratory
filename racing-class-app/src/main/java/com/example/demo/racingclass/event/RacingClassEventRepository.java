@@ -1,6 +1,5 @@
 package com.example.demo.racingclass.event;
 
-import com.example.demo.racingclass.RacingClass;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClient;

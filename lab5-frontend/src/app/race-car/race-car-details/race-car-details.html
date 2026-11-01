@@ -1,0 +1,29 @@
+<section class="panel">
+  @if (raceCar(); as car) {
+    <h1>{{ car.modelName }}</h1>
+
+    <dl class="details">
+      <dt>Model</dt>
+      <dd>{{ car.modelName }}</dd>
+
+      <dt>Numer startowy</dt>
+      <dd>#{{ car.startNumber }}</dd>
+
+      <dt>Pojemność silnika</dt>
+      <dd>{{ car.engineDisplacement }} l</dd>
+
+      <dt>Napęd hybrydowy</dt>
+      <dd>{{ car.hybridPowertrain ? 'Tak' : 'Nie' }}</dd>
+
+      <dt>Klasa</dt>
+      <dd>{{ racingClass()?.name ?? car.racingClass.id }}</dd>
+    </dl>
+
+    <div class="actions">
+      <a class="button" [routerLink]="['/classes', classId]">Powrót</a>
+      <a class="button" [routerLink]="['/classes', classId, 'cars', carId, 'edit']">Edytuj</a>
+    </div>
+  } @else {
+    <p>Ładowanie...</p>
+  }
+</section>
