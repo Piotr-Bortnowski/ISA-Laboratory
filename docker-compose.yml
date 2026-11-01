@@ -29,6 +29,7 @@ services:
     environment:
       SERVER_PORT: 8082
       SPRING_DATASOURCE_URL: jdbc:postgresql://race-car-db:5432/race_car
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: app
       SPRING_DATASOURCE_PASSWORD: app
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
@@ -41,10 +42,11 @@ services:
     environment:
       SERVER_PORT: 8081
       SPRING_DATASOURCE_URL: jdbc:postgresql://racing-class-db:5432/racing_class
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: app
       SPRING_DATASOURCE_PASSWORD: app
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      RACE_CAR_URL: http://race-car-app:8082
+      RACECARAPP_URL: http://race-car-app:8082
     depends_on:
       racing-class-db: { condition: service_healthy }
       race-car-app: { condition: service_started }
@@ -54,8 +56,8 @@ services:
     ports: ["8080:8080"]
     environment:
       SERVER_PORT: 8080
-      RACING_CLASS_URL: http://racing-class-app:8081
-      RACE_CAR_URL: http://race-car-app:8082
+      RACINGCLASSAPP_URL: http://racing-class-app:8081
+      RACECARAPP_URL: http://race-car-app:8082
     depends_on: [racing-class-app, race-car-app]
 
   frontend:
