@@ -23,10 +23,8 @@ export class RaceCarDetails {
   racingClass = signal<RacingClass | null>(null);
 
   constructor() {
-    this.raceCarService.get(this.carId)
-      .subscribe(car => this.raceCar.set(car));
+    this.raceCarService.get(this.carId).subscribe(car => this.raceCar.set(car));
     // load the class too, to show its name instead of just an id
-    this.racingClassService.get(this.classId)
-      .subscribe(rc => this.racingClass.set(rc));
+    this.racingClassService.get(this.classId).subscribe(rc => this.racingClass.set(rc));
   }
 }
