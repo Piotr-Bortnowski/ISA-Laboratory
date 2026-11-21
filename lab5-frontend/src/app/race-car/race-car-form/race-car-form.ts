@@ -26,8 +26,7 @@ export class RaceCarForm {
 
   constructor() {
     if (this.carId) {
-      this.service.get(this.carId)
-        .subscribe(car => this.form.patchValue(car));
+      this.service.get(this.carId).subscribe(car => this.form.patchValue(car));
     }
   }
 
