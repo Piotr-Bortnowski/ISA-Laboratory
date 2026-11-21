@@ -1,4 +1,4 @@
-// GET list → GetRacingClassesResponse
+// GET list -> GetRacingClassesResponse
 export interface RacingClasses {
   racingClasses: RacingClassEntry[];
 }
@@ -8,7 +8,7 @@ export interface RacingClassEntry {
   name: string;
 }
 
-// GET single → GetRacingClassResponse
+// GET single -> GetRacingClassResponse
 export interface RacingClass {
   id: string;
   name: string;
@@ -16,7 +16,7 @@ export interface RacingClass {
   minWeight: number;
 }
 
-// PUT body → PutRacingClassRequest
+// PUT body -> PutRacingClassRequest
 export interface RacingClassRequest {
   name: string;
   maxHorsepower: number;

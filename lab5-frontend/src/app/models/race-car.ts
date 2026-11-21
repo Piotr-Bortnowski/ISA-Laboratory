@@ -1,4 +1,4 @@
-// GET list → GetRaceCarsResponse
+// GET list -> GetRaceCarsResponse
 export interface RaceCars {
   raceCars: RaceCarEntry[];
 }
@@ -8,7 +8,7 @@ export interface RaceCarEntry {
   modelName: string;
 }
 
-// GET single → GetRaceCarResponse
+// GET single -> GetRaceCarResponse
 export interface RaceCar {
   id: string;
   modelName: string;
@@ -18,7 +18,7 @@ export interface RaceCar {
   racingClass: { id: string };
 }
 
-// PUT body → PutRaceCarRequest
+// PUT body -> PutRaceCarRequest
 export interface RaceCarRequest {
   modelName: string;
   startNumber: number;
