@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: app
     volumes: [racing-class-data:/var/lib/postgresql/data]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app"]
+      test: ["CMD-SHELL", "pg_isready -U app -d racing_class"]
       interval: 5s
       retries: 10
 
@@ -19,7 +19,7 @@ services:
       POSTGRES_PASSWORD: app
     volumes: [race-car-data:/var/lib/postgresql/data]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app"]
+      test: ["CMD-SHELL", "pg_isready -U app -d race_car"]
       interval: 5s
       retries: 10
 
