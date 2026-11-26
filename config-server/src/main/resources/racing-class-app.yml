@@ -1,0 +1,10 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://racing-class-db:5432/racing_class
+    username: app
+    password: app
+  jpa:
+    hibernate:
+      ddl-auto: validate

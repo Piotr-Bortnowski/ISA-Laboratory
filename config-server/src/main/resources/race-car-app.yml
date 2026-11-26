@@ -1,0 +1,10 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:postgresql://race-car-db:5432/race_car
+    username: app
+    password: app
+  jpa:
+    hibernate:
+      ddl-auto: validate
