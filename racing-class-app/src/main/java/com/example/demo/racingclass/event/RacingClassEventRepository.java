@@ -10,8 +10,8 @@ import java.util.UUID;
 public class RacingClassEventRepository {
     private final RestClient restClient;
 
-    public RacingClassEventRepository(@Value("${race-car-app.url}") String raceCarAppUrl) {
-        this.restClient = RestClient.create(raceCarAppUrl);
+    public RacingClassEventRepository(RestClient.Builder builder) {
+        this.restClient = builder.baseUrl("http://race-car-app").build();
     }
 
     public void create(UUID id) {

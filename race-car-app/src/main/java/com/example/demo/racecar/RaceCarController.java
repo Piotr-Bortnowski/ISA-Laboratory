@@ -21,6 +21,10 @@ public class RaceCarController {
     private final RaceCarService raceCarService;
     private final RacingClassService racingClassService;
 
+    private static final Logger log = LoggerFactory.getLogger(RaceCarController.class);
+    @Value("${eureka.instance.instance-id}") private String instanceId;
+    
+
     public RaceCarController(RaceCarService raceCarService, RacingClassService racingClassService) {
         this.raceCarService = raceCarService;
         this.racingClassService = racingClassService;
@@ -28,12 +32,14 @@ public class RaceCarController {
 
     @GetMapping("/race-cars")
     public GetRaceCarsResponse getRaceCars() {
+        log.info("[{}] GET /api/race-cars", instanceId);
         return toResponse(raceCarService.findAll());
     }
 
     @GetMapping("/racing-classes/{classId}/race-cars")
     public GetRaceCarsResponse getRacingClassCars(@PathVariable UUID classId) {
         Optional<RacingClass> classOptional = racingClassService.find(classId);
+        log.info("[{}] GET /api/race-cars", instanceId);
         if (classOptional.isPresent()) {
             return toResponse(raceCarService.findAllByRacingClass(classOptional.get()));
         }
@@ -45,6 +51,7 @@ public class RaceCarController {
     @GetMapping("/race-cars/{id}")
     public GetRaceCarResponse getRaceCar(@PathVariable UUID id) {
         Optional<RaceCar> carOptional = raceCarService.findById(id);
+        log.info("[{}] GET /api/race-cars", instanceId);
         if (carOptional.isPresent()) {
             return toResponse(carOptional.get());
         }
@@ -58,6 +65,7 @@ public class RaceCarController {
                                            @RequestBody PutRaceCarRequest request) {
         Optional<RacingClass> classOptional = racingClassService.find(classId);
         RacingClass racingClass;
+        log.info("[{}] GET /api/race-cars", instanceId);
         if (classOptional.isPresent()){
             racingClass = classOptional.get();
         }
@@ -94,6 +102,7 @@ public class RaceCarController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRaceCar(@PathVariable UUID id) {
         Optional<RaceCar> optionalRaceCar = raceCarService.findById(id);
+        log.info("[{}] GET /api/race-cars", instanceId);
         if (optionalRaceCar.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
