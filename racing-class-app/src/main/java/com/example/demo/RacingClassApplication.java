@@ -10,4 +10,10 @@ public class RacingClassApplication {
 		SpringApplication.run(RacingClassApplication.class, args);
 	}
 
+	@Bean
+	@LoadBalanced
+	RestClient.Builder restClientBuilder() { 
+		return RestClient.builder();
+	}
+
 }
