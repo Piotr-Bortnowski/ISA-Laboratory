@@ -1,6 +1,6 @@
 package com.example.demo.racingclass.event;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClient;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
 public class RacingClassEventRepository {
     private final RestClient restClient;
 
-    public RacingClassEventRepository(RestClient.Builder builder) {
+    public RacingClassEventRepository(@LoadBalanced RestClient.Builder builder) {
         this.restClient = builder.baseUrl("http://race-car-app").build();
     }
 
