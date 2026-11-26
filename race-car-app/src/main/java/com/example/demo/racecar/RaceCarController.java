@@ -5,6 +5,9 @@ import com.example.demo.racecar.dto.GetRaceCarsResponse;
 import com.example.demo.racecar.dto.PutRaceCarRequest;
 import com.example.demo.racingclass.RacingClass;
 import com.example.demo.racingclass.RacingClassService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +41,8 @@ public class RaceCarController {
 
     @GetMapping("/racing-classes/{classId}/race-cars")
     public GetRaceCarsResponse getRacingClassCars(@PathVariable UUID classId) {
+        log.info("[{}] GET /api/racing-classes/{}/race-cars", instanceId, classId);
         Optional<RacingClass> classOptional = racingClassService.find(classId);
-        log.info("[{}] GET /api/race-cars", instanceId);
         if (classOptional.isPresent()) {
             return toResponse(raceCarService.findAllByRacingClass(classOptional.get()));
         }
@@ -50,8 +53,8 @@ public class RaceCarController {
 
     @GetMapping("/race-cars/{id}")
     public GetRaceCarResponse getRaceCar(@PathVariable UUID id) {
+        log.info("[{}] GET /api/race-cars/{}", instanceId, id);
         Optional<RaceCar> carOptional = raceCarService.findById(id);
-        log.info("[{}] GET /api/race-cars", instanceId);
         if (carOptional.isPresent()) {
             return toResponse(carOptional.get());
         }
@@ -63,9 +66,9 @@ public class RaceCarController {
     @PutMapping("/racing-classes/{classId}/race-cars/{id}")
     public ResponseEntity<Void> putRaceCar(@PathVariable UUID classId, @PathVariable UUID id,
                                            @RequestBody PutRaceCarRequest request) {
+        log.info("[{}] PUT /api/racing-classes/{}/race-cars/{}", instanceId, classId, id);
         Optional<RacingClass> classOptional = racingClassService.find(classId);
         RacingClass racingClass;
-        log.info("[{}] GET /api/race-cars", instanceId);
         if (classOptional.isPresent()){
             racingClass = classOptional.get();
         }
@@ -101,8 +104,8 @@ public class RaceCarController {
     @DeleteMapping("/race-cars/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRaceCar(@PathVariable UUID id) {
+        log.info("[{}] DELETE /api/race-cars/{}", instanceId, id);
         Optional<RaceCar> optionalRaceCar = raceCarService.findById(id);
-        log.info("[{}] GET /api/race-cars", instanceId);
         if (optionalRaceCar.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

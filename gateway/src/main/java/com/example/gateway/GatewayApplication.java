@@ -1,6 +1,5 @@
 package com.example.gateway;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -15,8 +14,7 @@ public class GatewayApplication {
 	}
 
 	@Bean
-	public RouteLocator myRoutes(RouteLocatorBuilder builder, @Value("${racing-class-app.url}") String racingClassAppUrl,
-																@Value("${race-car-app.url}") String raceCarAppUrl) {
+	public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("race-cars", r -> r
 						.path("/api/race-cars/**")

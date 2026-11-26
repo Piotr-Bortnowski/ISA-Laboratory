@@ -17,6 +17,9 @@ public class DataInitializer {
 
     @PostConstruct
     public void init() {
+        if (!racingClassService.findAll().isEmpty()) {
+            return;
+        }
 
         RacingClass gt3 = RacingClass.builder()
                 .id(UUID.fromString("c1a55000-0000-0000-0000-000000000001"))

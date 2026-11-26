@@ -21,6 +21,10 @@ public class DataInitializer {
 
     @PostConstruct
     public void init() {
+        // shared database: seed only once, not on every start of every instance
+        if (!raceCarService.findAll().isEmpty()) {
+            return;
+        }
 
         RacingClass gt3 = RacingClass.builder()
                 .id(UUID.fromString("c1a55000-0000-0000-0000-000000000001")).build();
