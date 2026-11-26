@@ -20,15 +20,15 @@ public class GatewayApplication {
 		return builder.routes()
 				.route("race-cars", r -> r
 						.path("/api/race-cars/**")
-						.uri(raceCarAppUrl)
+						.uri("lb://race-car-app")
 				)
 				.route("race-cars-race-cars", r -> r
 						.path("/api/racing-classes/*/race-cars/**")
-						.uri(raceCarAppUrl)
+						.uri("lb://race-car-app")
 				)
 				.route("racing-classes", r -> r
 						.path("/api/racing-classes/**")
-						.uri(racingClassAppUrl)
+						.uri("lb://racing-class-app")
 				)
 				.build();
 	}
